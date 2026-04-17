@@ -1,0 +1,12 @@
+<!DOCTYPE struts PUBLIC
+  "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+  "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+  <!-- [A05-Misconfiguration] devMode=true — lộ stack trace chi tiết khi có lỗi -->
+  <constant name="struts.devMode" value="true" />
+  <constant name="struts.convention.result.path" value="/WEB-INF/content" />
+  <constant name="struts.convention.action.packages" value="com.webvul.shop.actions" />
+  <constant name="struts.multipart.maxSize" value="6291456" />
+</struts>
+
