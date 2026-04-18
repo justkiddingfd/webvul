@@ -36,6 +36,30 @@ ACME_EMAIL=admin@shop-lab.example.com
 docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 ```
 
+## Tự động reset DB (cron)
+Script `reset.sh` sẽ dừng stack, xoá volume DB (wipe dữ liệu), dọn uploads, rồi chạy lại compose.
+
+1) Cấp quyền chạy:
+```bash
+chmod +x /opt/webvul/reset.sh
+```
+
+2) Mở crontab:
+```bash
+crontab -e
+```
+
+3) Thêm job chạy mỗi 2 giờ:
+```cron
+0 */2 * * * cd /opt/webvul && ./reset.sh >> /var/log/webvul-reset.log 2>&1
+```
+
+4) Kiểm tra:
+```bash
+crontab -l
+tail -n 100 /var/log/webvul-reset.log
+```
+
 ## Tài khoản mặc định
 - Admin:
   - Email: `admin@webvul.local`
