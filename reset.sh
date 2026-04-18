@@ -12,4 +12,7 @@ rm -rf ./uploads/*
 mkdir -p ./uploads
 
 # Kéo image mới nhất (nếu dùng registry) và chạy lại
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --pull always --force-recreate
+# for dev override
+# docker compose --env-file .env.dev -f docker-compose.yml -f docker-compose.dev.yml up -d --pull always --force-recreate
+# for prod override
+docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d --pull always --force-recreate
