@@ -3,14 +3,6 @@ services:
     volumes:
       - ./infra/caddy/Caddyfile.domain:/etc/caddy/Caddyfile:ro
     environment:
-      DOMAIN: example.com
-      ACME_EMAIL: admin@example.com
-
-  app:
-    ports:
-      - "127.0.0.1:8080:8080"
-
-  mysql:
-    ports:
-      - "127.0.0.1:3306:3306"
+      DOMAIN: ${DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL}
 

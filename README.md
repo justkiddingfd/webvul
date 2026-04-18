@@ -11,22 +11,29 @@ docker compose up --build
 
 Mở:
 - HTTPS (self-signed): `https://localhost/`
-- HTTP direct (dev): `http://localhost:8080/`
+- HTTP direct (dev): `http://localhost:8080/` (cần compose dev override)
 
 Ghi chú: chứng chỉ HTTPS là self-signed, trình duyệt sẽ cảnh báo. Khi test bằng curl dùng `-k`.
+
+### Dev override (mở port 8080/3306 ra localhost)
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+```
 
 ## Deploy domain (HTTPS public)
 1) Trỏ DNS:
 - `A` record cho domain (và `www` nếu cần) về IP của server
 - Mở port `80` và `443` từ internet vào server
 
-2) Sửa file [docker-compose.prod.yml](file:///C:/Users/ducpv/Documents/Project/2026/webvul/docker-compose.prod.yml):
-- `DOMAIN`: domain thật (vd: `shop-lab.example.com`)
-- `ACME_EMAIL`: email nhận thông báo từ Let's Encrypt
+2) Tạo file env (vd: `.env.prod`):
+```env
+DOMAIN=shop-lab.example.com
+ACME_EMAIL=admin@shop-lab.example.com
+```
 
 3) Chạy:
 ```bash
-docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+docker compose --env-file .env.prod -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 ```
 
 ## Tài khoản mặc định

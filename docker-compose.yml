@@ -7,8 +7,6 @@ services:
       MYSQL_USER: webvul
       MYSQL_PASSWORD: webvul_pass
       MYSQL_ROOT_PASSWORD: rootpass
-    ports:
-      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
@@ -23,7 +21,7 @@ services:
     image: caddy:2.8.4-alpine
     container_name: webvul-proxy
     environment:
-      DOMAIN: localhost
+      DOMAIN: ${DOMAIN:-localhost}
     ports:
       - "80:80"
       - "443:443"
@@ -47,8 +45,6 @@ services:
       DB_PASSWORD: webvul_pass
       UPLOAD_DIR: /data/uploads
       JAVA_OPTS: -Xms64m -Xmx160m -XX:MaxMetaspaceSize=64m -XX:+UseSerialGC
-    ports:
-      - "8080:8080"
     volumes:
       - ./uploads:/data/uploads
     mem_limit: 256m
