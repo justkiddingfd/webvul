@@ -15,6 +15,20 @@ Mở:
 
 Ghi chú: chứng chỉ HTTPS là self-signed, trình duyệt sẽ cảnh báo. Khi test bằng curl dùng `-k`.
 
+## Deploy domain (HTTPS public)
+1) Trỏ DNS:
+- `A` record cho domain (và `www` nếu cần) về IP của server
+- Mở port `80` và `443` từ internet vào server
+
+2) Sửa file [docker-compose.prod.yml](file:///C:/Users/ducpv/Documents/Project/2026/webvul/docker-compose.prod.yml):
+- `DOMAIN`: domain thật (vd: `shop-lab.example.com`)
+- `ACME_EMAIL`: email nhận thông báo từ Let's Encrypt
+
+3) Chạy:
+```bash
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+```
+
 ## Tài khoản mặc định
 - Admin:
   - Email: `admin@webvul.local`
