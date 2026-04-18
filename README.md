@@ -9,7 +9,11 @@ Yêu cầu: Docker Desktop.
 docker compose up --build
 ```
 
-Mở: `http://localhost:8080/`
+Mở:
+- HTTPS (self-signed): `https://localhost/`
+- HTTP direct (dev): `http://localhost:8080/`
+
+Ghi chú: chứng chỉ HTTPS là self-signed, trình duyệt sẽ cảnh báo. Khi test bằng curl dùng `-k`.
 
 ## Tài khoản mặc định
 - Admin:
@@ -22,8 +26,8 @@ Mở: `http://localhost:8080/`
 ## Quyền admin
 - Admin có thêm mục `Admin` trên header để quản trị sản phẩm.
 - Trang quản trị:
-  - Danh sách: `http://localhost:8080/admin-products.action`
-  - Thêm/Sửa: `http://localhost:8080/admin-product.action`
+  - Danh sách: `https://localhost/admin-products.action`
+  - Thêm/Sửa: `https://localhost/admin-product.action`
   - Upload ảnh: chọn file ở form Add/Edit (PNG/JPG/GIF/WEBP, tối đa 5MB)
 
 Nếu bạn đã chạy trước đó và MySQL đã có volume dữ liệu, script `db/init.sql` có thể không được chạy lại. Reset DB:
