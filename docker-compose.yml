@@ -29,10 +29,16 @@ services:
       DB_USER: webvul
       DB_PASSWORD: webvul_pass
       UPLOAD_DIR: /data/uploads
+      JAVA_OPTS: -Xms64m -Xmx160m -XX:MaxMetaspaceSize=64m -XX:+UseSerialGC
     ports:
       - "8080:8080"
     volumes:
       - ./uploads:/data/uploads
+    mem_limit: 256m
+    deploy:
+      resources:
+        limits:
+          memory: 256M
     depends_on:
       mysql:
         condition: service_healthy
