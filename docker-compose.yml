@@ -22,6 +22,8 @@ services:
   proxy:
     image: caddy:2.8.4-alpine
     container_name: webvul-proxy
+    environment:
+      DOMAIN: localhost
     ports:
       - "80:80"
       - "443:443"
